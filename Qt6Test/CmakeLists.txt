@@ -1,0 +1,105 @@
+﻿project(Qt6Test LANGUAGES CXX)	#== 指定工程名和编程语言 
+
+message(STATUS "\n\n=============== target: ${PROJECT_NAME} ============")
+
+#==================== 引入文件 =================
+FILE(GLOB_RECURSE PROJ_HEADER_FILES "*.h" "*.hpp") #== cpp 头文件
+FILE(GLOB_RECURSE PROJ_SOURCE_FILES "*.c" "*.cpp") #== cpp 源文件, 好像也能用 aux_source_directory?
+FILE(GLOB_RECURSE PROJ_UI_FILES 	"*.ui")	  #== Qt ui 文件
+FILE(GLOB_RECURSE PROJ_QRC_FILES 	"*.qrc")  #== Qt qrc 文件
+# 无需再次包含 ui_*.h , 在项目前面 set(CMAKE_INCLUDE_CURRENT_DIR ON) 会搞定它
+#* 这里 GLOB_RECURSE 可包含子文件夹下的所有文件, 如果不想添加子文件夹中的文件, 请改成 GLOB
+message("hd2: ${PROJ_HEADER_FILES}")
+
+
+#== 包含图片等资源文件
+FILE(GLOB_RECURSE PROJ_RES_FILES 	"./res/*") #把非.qrc 结尾的资源文件(图片,res等)全部放到PROJ_RES_FILES分类中
+source_group("Resources"   	FILES ${PROJ_RES_FILES})		#== 图片等资源文件 放进工程目录
+
+
+#======  ======== Qt 文件处理 ==============
+#== 编译 .ui 文件
+#set(CMAKE_AUTOUIC_SEARCH_PATHS ./ui) #AUTOUIC 搜索目录手动指定,否则会导致AUTOUIC报错找不到文件
+QT6_WRAP_UI(PROJ_UI_HEADERS ${PROJ_UI_FILES})  #== AUTOUIC 关闭时需要手动翻译ui文件生成 ui_***.h
+qt6_add_resources( PROJ_QRC_HEADERS ${PROJ_QRC_FILES} )
+
+
+#==QT 编译文件目录
+set(PROJ_QT_COMPILE_FILE_LIST  ${PROJ_SOURCE_FILES} ${PROJ_HEADER_FILES} ${PROJ_UI_HEADERS}  ${PROJ_QRC_FILES}) 
+
+
+#== 对 Qt 文件进行在 visual studio 中进行分组
+source_group("Qt_Forms" 	FILES ${PROJ_UI_FILES}) 	# 在 vs 里面把这些文件归类进去要不太难看
+source_group("Qt_Qrcs" 		FILES ${PROJ_QRC_FILES}) 	# Qt 的 qrc 文件
+source_group("Qt_Sources" 	FILES ${PROJ_SOURCE_FILES}) # 主要是因为默认的 Source 目录有一些生成的无关文件, 单独拿出来
+source_group("Qt_Headers" 	FILES ${PROJ_HEADER_FILES})
+
+
+
+#==================  生成可执行文件 ====================
+
+#===== ==== 创建 target ==========
+add_executable(  #* 生成可执行文件 这就是一个 target
+	${PROJECT_NAME}  #WIN32      #* 可执行文件名
+		${PROJ_SOURCE_FILES}
+		${PROJ_HEADER_FILES}
+		${PROJ_UI_HEADERS}
+		${PROJ_QRC_FILES}
+		app_win32.rc #* 设置程序图标
+)
+
+
+
+#* 把库目录加入到路径中, 后面手动添加动态库的时候不需要给出路径了
+# 这里opencv已经使用自动化引用了 ${OPENCV_LIBS} 变量, 不需要在这里这样做,
+target_include_directories(
+	${PROJECT_NAME} AFTER PRIVATE
+	${PROJECT_SOURCE_DIR}
+	${PROJECT_SOURCE_DIR}/MainWindow
+	
+	#${OpenCV_LIBRARY_DIRS}
+)
+
+
+#也可以这样:
+# set(3rdParty_LIBS "")
+# set(3rdParty_LIBS ${3rdParty_LIBS} "")
+
+#* 向生成的 target 链接别的库
+target_link_libraries(  #也可以使用 link_libraries,但是这是全局的
+	${PROJECT_NAME}
+		Qt6::Core #??居然可以不加?
+		Qt6::Gui
+		Qt6::Widgets  #必须
+			#== 后续添加 Qt 模块!
+		
+		
+		${FMT_LIBS} #* FMT
+		
+		# ${3rdParty_LIBS}
+		#其他自定义第三方库, 需要在前面 link_directories 中加入这个路径, 然后在这里手动一个一个添加 .lib 文件
+		#格式类似  debug osgd.lib optimized osg.lib debug osgViewerd.lib optimized osgViewer.lib 
+)
+
+
+#================== 安装 ===================
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release") #== install 仅作用于 release 模式下
+	install(
+		TARGETS ${PROJECT_NAME}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}
+		#LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+		#ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/arc
+	)
+	
+	#== 把 资源文件 输出到指定目录
+	install(
+		FILES 		${PROJ_RES_FILES}
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/res
+	)
+	
+	
+endif()
+
+#====================== 输出信息 ====================
+#Proj_SHOW_MSG()

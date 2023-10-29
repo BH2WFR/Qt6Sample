@@ -1,0 +1,36 @@
+﻿#include "winver.h"
+#include "windows.h"
+
+IDI_ICON1 ICON DISCARDABLE "res/icon.ico"
+
+VS_VERSION_INFO VERSIONINFO
+	FILEVERSION     0,1,0,0
+	PRODUCTVERSION  0,1,0,0
+	FILEFLAGSMASK   0x3fL
+#ifdef _DEBUG
+	FILEFLAGS VS_FF_DEBUG
+#else
+	FILEFLAGS 0x0L
+#endif
+	FILEOS VOS__WINDOWS32
+	FILETYPE VFT_DLL
+	FILESUBTYPE 0x0L
+	BEGIN
+		BLOCK "StringFileInfo"
+		BEGIN
+			BLOCK "040904b0"
+			BEGIN
+				VALUE "CompanyName", "GSB Electronic" //公司名称
+				VALUE "FileDescription", "QT6_Test" //dll/exe描述
+				VALUE "FileVersion", "4.4.2.0\0"//版本
+				VALUE "LegalCopyright", "Copyright(C) 2023 GSB Electronic Co."//版权
+				VALUE "OriginalFilename", "\0"//原始文件
+				VALUE "ProductName", "QT6_Test\0"		    //产品名
+				VALUE "ProductVersion", "1.14.51.4\0"		//产品版本
+			END
+		END
+		BLOCK "VarFileInfo"
+		BEGIN
+			VALUE "Translation", 0x0804, 0x03A8 //#中文：0x0804  0x03A8 英文：0x0409  0x04b0
+		END
+	END
