@@ -26,9 +26,10 @@ set(CMAKE_PREFIX_PATH "")
 # set(LIBRARY_OUTPUT_PATH    "${CMAKE_BINARY_DIR}/OUTPUT") #* 生成的库和可执行文件放到哪里?
 #set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/OUTPUT/EXECUTABLE") # 不这样设置可能会导致复杂工程中 exe 找不到 dll
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/OUTPUT/ARCHIVE") # 静态库lib, windows动态库导出符号lib
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/OUTPUT/LIBRARY") # 动态库so/dylib, Windows MODULE动态库dll
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/OUTPUT/RUNTIME") # 可执行文件, Windows SHARED 动态库dll
+set(PROJ_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJ_OUTPUT_DIR}/ARCHIVE") # 静态库lib, windows动态库导出符号lib
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJ_OUTPUT_DIR}/LIBRARY") # 动态库so/dylib, Windows MODULE动态库dll
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJ_OUTPUT_DIR}/RUNTIME") # 可执行文件, Windows SHARED 动态库dll
 
 # set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG 	${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 # set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE  ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
@@ -216,10 +217,8 @@ message("\n\n")
 
 
 #=== ================== FMT =====================
-set(FMT_DIR "${3rdParty_DIR}/fmt-10.0.0")
-include_directories(AFTER "${FMT_DIR}/include")
-link_directories   (AFTER "${FMT_DIR}/lib")
-set(FMT_LIBS debug fmtd.lib  optimized fmt.lib)
+set(FMT_DIR "${3rdParty_DIR}/fmt-10.1.1")
+find_package(fmt REQUIRED  PATHS ${FMT_DIR}/lib/cmake/fmt)
 # 在 target 的 target_link_libraries 中手动添加 ${FMT_LIBS}
 
 

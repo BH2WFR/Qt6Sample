@@ -13,7 +13,7 @@
 				"moduleLoad": false,
 				"trace": true
 			},
-			"visualizerFile": "c:\\Users\\BH2WFR\\AppData\\Roaming\\Code\\User\\workspaceStorage\\344fc7d8797a94ac55945703ce2e66ae\\tonka3000.qtvsctools\\qt.natvis.xml"
+			"visualizerFile": "c:\\Users\\BH2WFR\\AppData\\Roaming\\Code\\User\\workspaceStorage\\77938428774ef8362da8877e2ac5f43c\\tonka3000.qtvsctools\\qt.natvis.xml"
 		},
 		{
 			"name": "VSDBG_Launch",
@@ -34,7 +34,7 @@
 					"value": "${env.PATH};C:/Program_Files/Qt/6.5.2/msvc2019_64/bin;"
 				}
 			],
-			"visualizerFile": "c:\\Users\\BH2WFR\\AppData\\Roaming\\Code\\User\\workspaceStorage\\344fc7d8797a94ac55945703ce2e66ae\\tonka3000.qtvsctools\\qt.natvis.xml"
+			"visualizerFile": "c:\\Users\\BH2WFR\\AppData\\Roaming\\Code\\User\\workspaceStorage\\77938428774ef8362da8877e2ac5f43c\\tonka3000.qtvsctools\\qt.natvis.xml"
 		}
 	]
 } 

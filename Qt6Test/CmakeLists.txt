@@ -74,7 +74,7 @@ target_link_libraries(  #也可以使用 link_libraries,但是这是全局的
 			#== 后续添加 Qt 模块!
 		
 		
-		${FMT_LIBS} #* FMT
+		fmt::fmt #* FMT
 		
 		# ${3rdParty_LIBS}
 		#其他自定义第三方库, 需要在前面 link_directories 中加入这个路径, 然后在这里手动一个一个添加 .lib 文件

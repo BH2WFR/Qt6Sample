@@ -1,5 +1,7 @@
 build/*
+BUILD/*
 install/*
+INSTALL/*
 out/*
 cmake_gui/*
 3rdlibs/*
@@ -7,6 +9,8 @@ bin/*
 **/CMakeFiles/*
 **/cmake_install.cmake
 **/CMakeCache.txt
+**/CMakeLists.txt.user
 .vs/*
 **/.vs/*
 **/*.bak
+**/*.bak_*
