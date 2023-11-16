@@ -16,7 +16,7 @@
 
 int main(int argc, char *argv[])
 {
-QT_HIGH_DPI();
+    QT_HIGH_DPI();
     //QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
     QApplication a(argc, argv);
     MainWindow w;

@@ -223,7 +223,8 @@ find_package(fmt REQUIRED  PATHS ${FMT_DIR}/lib/cmake/fmt)
 
 
 #=== =========== TerminalBeauty =====================
-include_directories(AFTER "${3rdParty_DIR}/GSB-TerminalBeauty")
+#include_directories(AFTER "${3rdParty_DIR}/GSB-TerminalBeauty")
+include_directories(AFTER "${CMAKE_SOURCE_DIR}/GSB-TerminalBeauty")
 
 
 #== ================ 自创库 =================
