@@ -176,7 +176,16 @@
 		"serializer": "cpp",
 		"cullingset": "cpp",
 		"valueobject": "cpp",
-		"qkeyevent": "cpp"
+		"regex": "cpp",
+		"cassert": "cpp",
+		"future": "cpp",
+		"qobject": "cpp",
+		"qstring": "cpp",
+		"qlist": "cpp",
+		"qbytearray": "cpp",
+		"qdebug": "cpp",
+		"qkeyevent": "cpp",
+		"qjsonarray": "cpp"
 	},
 	"cSpell.enabledLanguageIds": [
 		"asciidoc",
