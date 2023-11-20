@@ -6,9 +6,15 @@
 #include <qglobal.h>
 #include <QObject>
 #include <QApplication>
-#include <TerminalBeauty.h>
-
 #include <QDebug>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <qmetaobject>
+#include <QMetaProperty>
+#include <qmetatype>
+
+
+#include <TerminalBeauty.h>
 
 
 class A : public QObject{
@@ -51,8 +57,6 @@ public:
     
     void setB1pri1(int num) {b1pri1 = num;}
     void setB1pri2(int num) {b1pri2 = num;}
-    
-    QMap<QString, QVariant> propertyGroup();
     
 public slots:
 	virtual void MySlot() override{

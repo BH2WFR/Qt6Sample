@@ -185,7 +185,8 @@
 		"qbytearray": "cpp",
 		"qdebug": "cpp",
 		"qkeyevent": "cpp",
-		"qjsonarray": "cpp"
+		"qjsonarray": "cpp",
+		"qjsonobject": "cpp"
 	},
 	"cSpell.enabledLanguageIds": [
 		"asciidoc",

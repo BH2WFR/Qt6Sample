@@ -87,8 +87,9 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")  #* 如果在 MSVC 编译器上
 	#* == 编译器参数设置
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")	#开启多核编译
 	set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   /MP")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /utf-8")#开启 UNICODE 编译, 否则 Qt 抽风
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /sdl-") #关闭 SDL 检查, 允许使用 sscanf() 之类的不安全函数
+	
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /utf-8") # 默认文件编码设置为 UTF-8, 否则 MSVC 会默认按照 GB2312 编码
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /sdl-") # 关闭 SDL 检查, 允许使用 sscanf() 之类的不安全函数
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus") #让__cplusplus 宏等于当前最新的c++版本, 不支持c++11, 仅限14,17,20, 版本>VS2017有效
 	
 	#* 清除 debug/release 专用参数
