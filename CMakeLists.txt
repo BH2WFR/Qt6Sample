@@ -22,6 +22,7 @@ set(PROJ_EXE_TargetName_1 Qt6Test) #== 设置 target 名, cmake 中 target 是�
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMakeTargets") # 把 ALL_BUILD 和 ZERO_CHECK 放到 CMakeTargets 文件夹下
 set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_PREFIX}/bin)
 set(CMAKE_PREFIX_PATH "")
+#set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # set(LIBRARY_OUTPUT_PATH    "${CMAKE_BINARY_DIR}/OUTPUT") #* 生成的库和可执行文件放到哪里?
 #set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/OUTPUT/EXECUTABLE") # 不这样设置可能会导致复杂工程中 exe 找不到 dll
@@ -111,6 +112,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")  #* 如果在 MSVC 编译器上
 	set(CMAKE_CXX_FLAGS_DEBUG  	"${CMAKE_CXX_FLAGS_DEBUG} /Od /Ob0") 	# debug 关闭优化
 	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2 /Ob2") 	# release 开优化
 	
+	#set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 	
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")  #* 如果在 GCC 编译器上
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -119,7 +121,12 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")  #* 如果在 GCC 编译器上
 else()
 	message(FATAL_ERROR "--------- temporary only supports MSVC compiler and Windows NT OS...")
 endif() #MSVC/GCC/CLANG
-
+# message("${CMAKE_CXX_FLAGS}\n\n")
+# message("${CMAKE_CXX_FLAGS_DEBUG}\n\n")
+# message("${CMAKE_CXX_FLAGS_RELEASE}\n\n")
+# message("${CMAKE_CXX_LINKER_FLAGS}\n\n")
+# message("${CMAKE_CXX_LINKER_FLAGS_DEBUG}\n\n")
+# message("${CMAKE_CXX_LINKER_FLAGS_RELEASE}\n\n")
 
 
 #======================= 函数 ===================

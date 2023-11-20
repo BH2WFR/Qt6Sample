@@ -67,7 +67,7 @@ target_include_directories(
 
 #* 向生成的 target 链接别的库
 target_link_libraries(  #也可以使用 link_libraries,但是这是全局的
-	${PROJECT_NAME}
+	${PROJECT_NAME} PRIVATE
 		Qt6::Core #??居然可以不加?
 		Qt6::Gui
 		Qt6::Widgets  #必须

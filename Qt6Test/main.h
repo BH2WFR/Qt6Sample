@@ -7,7 +7,14 @@
 #include <QObject>
 #include <QApplication>
 #include <TerminalBeauty.h>
+#include <QDebug>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <qmetaobject>
+#include <QMetaProperty>
+#include <qmetatype>
 
+#include <QMap>
 #include <QDebug>
 
 
@@ -23,7 +30,9 @@ public slots:
     virtual void MySlot(){
         qDebug() << "A";
     }
+    void myTimerSlot1();
 public:
+
     A(){
         //QObject::connect(pushButtonCntUp, SIGNAL(clicked()), MainWindow, SLOT(btnCntUp_Click()));
         QObject::connect(this, SIGNAL(MySignal()), this, SLOT(MySlot()));
@@ -44,6 +53,7 @@ public:
     
     Q_PROPERTY(int b1pri1 READ getB1pri1 WRITE setB1pri1 MEMBER b1pri1);
     Q_PROPERTY(int b1pri2 READ getB1pri2 WRITE setB1pri2 MEMBER b1pri2);
+
 
     
     int getB1pri1() const {return b1pri1;}

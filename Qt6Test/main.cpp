@@ -1,41 +1,78 @@
-#include "main.h"
+﻿#include "main.h"
 #include "mainwindow.h"
 
 #include <qglobal.h>
 #include <QObject>
 #include <QApplication>
 #include <TerminalBeauty.h>
+#include <QTimer>
 
-#include <QDebug>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <qmetaobject>
-#include <QMetaProperty>
-#include <qmetatype>
-
+#include <iostream>
+#include <functional>
+#include <memory>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <chrono>
 
 #include <fmt/core.h>
 #include <fmt/format.h>
 
 
+class Test{
+public:
+	int num {0};
+	Test() {
+		fmt::println("构造 Test");
+	}
+	Test(int num) {
+		this->num = num;
+		fmt::println("构造 Test, num={}", num);
+	}
+	~Test() {
+		fmt::println("析构 Test, num={}", this->num);
+	}
+};
+
+QTimer* gp_timer;
+
+void A::myTimerSlot1()
+{
+	static int num {0};
+	fmt::println("timer slot, num = {}", num);
+	Sleep(200);
+	gp_timer->setInterval(gp_timer->interval() - 10);
+	fmt::println("{}", gp_timer->interval());
+	
+}
 
 
 int main(int argc, char *argv[])
 {
-	QT5_HIGH_DPI();
-	TERMINAL_TITLE("Qt6Test");
-	PRINT_ARGV(argc, argv);
 	
-	QApplication a(argc, argv);
+	
+	CONSOLE_TITLE("Qt6Test");
+	CONSOLE_UTF_8();
+	QT5_HIGH_DPI();
+	PRINT_ARGV(argc, argv);
+	PRINT_ERR("错误信息");
+	//RETURN_IF_CUDA_ERR(1, "shabi", 0);
+	//Test test;
+	QApplication app(argc, argv);
 	MainWindow w;
 	
 	//* 调试命令行
-	QDEBUGNN << CQFlash CLYellow "=================== Project Debugging  中文 ================" CDefault;
+	QDEBUGNN << CQFlash CInverse CBold "============ Project Debugging  =============" CDefault;
 	
 	A aa;
 	aa.MySignal();
 	
-
+	gp_timer = new QTimer(nullptr); // 参数改为 父类 Q_Object 的 指针
+	QObject::connect(gp_timer, &QTimer::timeout, &aa, &A::myTimerSlot1);
+	gp_timer->setSingleShot(true);
+	gp_timer->start(1000); //每秒触发一次
+	
+	
 	
 	std::unique_ptr<A> b1 {std::make_unique<B1>()};
 	emit b1->MySignal();
@@ -107,7 +144,7 @@ int main(int argc, char *argv[])
 	emit b2->MySignal();
 	
 	w.show();
-	return a.exec();
+	return app.exec();
 }
 
 QMap<QString, QVariant> B1::propertyGroup()
