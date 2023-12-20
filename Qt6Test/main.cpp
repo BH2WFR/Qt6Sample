@@ -1,4 +1,4 @@
-﻿#include "main.h"
+#include "main.h"
 #include "mainwindow.h"
 
 #include <qglobal.h>
@@ -30,7 +30,7 @@ public:
 		fmt::println("构造 Test, num={}", num);
 	}
 	~Test() {
-		fmt::println("析构 Test, num={}", this->num);
+		fmt::println("析构 Test, num={}", num);
 	}
 };
 
@@ -49,7 +49,6 @@ void A::myTimerSlot1()
 
 int main(int argc, char *argv[])
 {
-	
 	
 	CONSOLE_TITLE("Qt6Test");
 	CONSOLE_UTF_8();
@@ -77,7 +76,9 @@ int main(int argc, char *argv[])
 	std::unique_ptr<A> b1 {std::make_unique<B1>()};
 	emit b1->MySignal();
 	
-	auto metaObject = b1->metaObject(); //获取 metaobject, 在读取名字索引的时候会用到
+	std::string a {};
+
+	auto metaObject = b1->metaObject(); //获取 metaobject, 在读取名字索引的时候会用到█
 	if (!metaObject) // Qt 中每一个类(不论继承关系) 都会有 metaObject, 这样做不会读取父类的 MEtaobject
 		return -1;
 	
