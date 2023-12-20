@@ -1,5 +1,5 @@
 ﻿/*
-	* Project URL: https://github.com/BH2WFR/TerminalUtil
+	* Project URL: https://github.com/BH2WFR/ConsoleUtil
 	* Author:		BH2WFR
 */
 #ifndef CONSOLE_UTIL_H__

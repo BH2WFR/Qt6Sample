@@ -14,7 +14,6 @@
 
 
 
-
 int main(int argc, char *argv[])
 {
 	QT5_HIGH_DPI();
